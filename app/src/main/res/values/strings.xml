@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">НМедиа</string>
-    <string name="avatar_description">Аватар</string>
-    <string name="author_name">Нетология. Университет интернет-профессий будущего</string>
-    <string name="published_date">21 мая в 18:36</string>
-    <string name="menu_description">Меню</string>
-    <string name="post_content">Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb</string>
-    <string name="like_description">Лайк</string>
-    <string name="like_count" translatable="false">10</string>
-    <string name="share_description">Поделиться</string>
-    <string name="share_count" translatable="false">5</string>
-    <string name="views_description">Просмотры</string>
-    <string name="views_count" translatable="false">999</string>
+    <string name="app_name">NMedia</string>
+    <string name="avatar">Avatar</string>
+    <string name="like">Like</string>
+    <string name="share">Share</string>
+    <string name="menu">Menu</string>
 </resources>

@@ -1,149 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".MainActivity">
 
+    <!-- Аватар -->
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:contentDescription="@string/avatar_description"
+        android:contentDescription="@string/avatar"
+        android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Имя автора -->
     <TextView
         android:id="@+id/author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
-        android:singleLine="true"
-        android:text="@string/author_name"
+        android:maxLines="1"
+        android:textColor="#000000"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/published"
         app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@id/avatar"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Нетология. Университет интернет-профессий будущего" />
 
+    <!-- Дата публикации -->
     <TextView
         android:id="@+id/published"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/published_date"
-        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        android:textColor="#999999"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
-        app:layout_constraintEnd_toStartOf="@id/menu"
-        app:layout_constraintStart_toEndOf="@id/avatar"
-        app:layout_constraintTop_toBottomOf="@id/author" />
+        app:layout_constraintEnd_toEndOf="@id/author"
+        app:layout_constraintStart_toStartOf="@id/author"
+        app:layout_constraintTop_toBottomOf="@id/author"
+        tools:text="21 мая в 18:36" />
 
+    <!-- Меню (три точки) -->
     <ImageButton
         android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/menu_description"
+        android:contentDescription="@string/menu"
+        android:src="@drawable/ic_menu_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_more_vert_24" />
+        app:layout_constraintTop_toTopOf="@id/avatar" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/header_barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="avatar,published,menu" />
-
+    <!-- Текст поста -->
     <TextView
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:autoLink="web"
-        android:text="@string/post_content"
+        android:lineSpacingExtra="4dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_barrier" />
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        tools:text="Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу." />
 
+    <!-- Барьер для нижних элементов -->
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/content_barrier"
+        android:id="@+id/barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content" />
 
+    <!-- Кнопка Like -->
     <ImageButton
-        android:id="@+id/like_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/like"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/like_description"
+        android:contentDescription="@string/like"
+        android:src="@drawable/ic_like_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/content_barrier"
-        app:srcCompat="@drawable/ic_favorite_border_24" />
+        app:layout_constraintTop_toBottomOf="@id/barrier" />
 
+    <!-- Счетчик лайков -->
     <TextView
-        android:id="@+id/like_count"
+        android:id="@+id/likesCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/like_count"
-        app:layout_constraintBottom_toBottomOf="@id/like_button"
-        app:layout_constraintStart_toEndOf="@id/like_button"
-        app:layout_constraintTop_toTopOf="@id/like_button" />
+        android:layout_marginStart="8dp"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/like"
+        app:layout_constraintStart_toEndOf="@id/like"
+        app:layout_constraintTop_toTopOf="@id/like"
+        tools:text="10" />
 
+    <!-- Кнопка Share -->
     <ImageButton
-        android:id="@+id/share_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:id="@+id/share"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="24dp"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/share_description"
-        app:layout_constraintBottom_toBottomOf="@id/like_button"
-        app:layout_constraintStart_toEndOf="@id/like_count"
-        app:layout_constraintTop_toTopOf="@id/like_button"
-        app:srcCompat="@drawable/ic_share_24" />
+        android:contentDescription="@string/share"
+        android:src="@drawable/ic_share_24"
+        app:layout_constraintBottom_toBottomOf="@id/like"
+        app:layout_constraintStart_toEndOf="@id/likesCount"
+        app:layout_constraintTop_toTopOf="@id/like" />
 
+    <!-- Счетчик Share -->
     <TextView
-        android:id="@+id/share_count"
+        android:id="@+id/sharesCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/share_count"
-        app:layout_constraintBottom_toBottomOf="@id/share_button"
-        app:layout_constraintStart_toEndOf="@id/share_button"
-        app:layout_constraintTop_toTopOf="@id/share_button" />
+        android:layout_marginStart="8dp"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/share"
+        app:layout_constraintStart_toEndOf="@id/share"
+        app:layout_constraintTop_toTopOf="@id/share"
+        tools:text="5" />
 
-    <ImageButton
-        android:id="@+id/views_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/views_description"
-        app:layout_constraintBottom_toBottomOf="@id/like_button"
-        app:layout_constraintEnd_toStartOf="@id/views_count"
-        app:layout_constraintTop_toTopOf="@id/like_button"
-        app:srcCompat="@drawable/ic_visibility_24" />
+    <!-- Иконка просмотров -->
+    <ImageView
+        android:id="@+id/viewsIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="@string/avatar"
+        android:src="@drawable/ic_views_24"
+        app:layout_constraintBottom_toBottomOf="@id/like"
+        app:layout_constraintEnd_toStartOf="@id/viewsCount"
+        app:layout_constraintTop_toTopOf="@id/like" />
 
+    <!-- Счетчик просмотров -->
     <TextView
-        android:id="@+id/views_count"
+        android:id="@+id/viewsCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="40dp"
-        android:gravity="end"
-        android:text="@string/views_count"
-        app:layout_constraintBottom_toBottomOf="@id/like_button"
+        android:layout_marginStart="8dp"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/like"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/like_button" />
+        app:layout_constraintTop_toTopOf="@id/like"
+        tools:text="5K" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
