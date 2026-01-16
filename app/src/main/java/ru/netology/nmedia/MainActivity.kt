@@ -1,63 +1,69 @@
 package ru.netology.nmedia
-
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
-
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
-    private var post = Post(
-        id = 1,
-        author = "Нетология. Университет интернет-профессий будущего",
-        content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению.",
-        published = "21 мая в 18:36",
-        likes = 999,
-        shares = 997,
-        views = 5432,
-        likedByMe = false
-    )
+    private var likesCount = 999
+    private var sharesCount = 997
+    private var viewsCount = 5432
+    private var isLiked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        render()
+        updateUI()
 
-        // Обработчик клика на лайк
         binding.like.setOnClickListener {
-            post = if (post.likedByMe) {
-                post.copy(likes = post.likes - 1, likedByMe = false)
+            isLiked = !isLiked
+
+            if (isLiked) {
+                likesCount++
+                binding.like.setImageResource(R.drawable.ic_liked_24)
             } else {
-                post.copy(likes = post.likes + 1, likedByMe = true)
+                likesCount--
+                binding.like.setImageResource(R.drawable.ic_like_24)
             }
-            render()
+
+            binding.likesCount.text = formatCount(likesCount)
         }
 
-        // Обработчик клика на share
         binding.share.setOnClickListener {
-            post = post.copy(shares = post.shares + 1)
-            render()
+            sharesCount++
+            binding.sharesCount.text = formatCount(sharesCount)
         }
     }
 
-    private fun render() {
-        binding.apply {
-            author.text = post.author
-            published.text = post.published
-            content.text = post.content
+    private fun updateUI() {
+        binding.likesCount.text = formatCount(likesCount)
+        binding.sharesCount.text = formatCount(sharesCount)
+        binding.viewsCount.text = formatCount(viewsCount)
 
-            // Меняем иконку лайка в зависимости от состояния
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
-            )
+        if (isLiked) {
+            binding.like.setImageResource(R.drawable.ic_liked_24)
+        } else {
+            binding.like.setImageResource(R.drawable.ic_like_24)
+        }
+    }
 
-            // Форматируем и отображаем счётчики
-            likesCount.text = formatCount(post.likes)
-            sharesCount.text = formatCount(post.shares)
-            viewsCount.text = formatCount(post.views)
+    private fun formatCount(count: Int): String {
+        return when {
+            count < 1_000 -> count.toString()
+            count < 10_000 -> {
+                val thousands = count / 1_000
+                val hundreds = (count % 1_000) / 100
+                "${thousands}.${hundreds}K"
+            }
+            count < 1_000_000 -> "${count / 1_000}K"
+            count < 10_000_000 -> {
+                val millions = count / 1_000_000
+                val hundredThousands = (count % 1_000_000) / 100_000
+                "${millions}.${hundredThousands}M"
+            }
+            else -> "${count / 1_000_000}M"
         }
     }
 }
