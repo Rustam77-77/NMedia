@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
     <string name="app_name">NMedia</string>
-    <string name="avatar">Avatar</string>
-    <string name="like">Like</string>
-    <string name="share">Share</string>
-    <string name="menu">Menu</string>
+    <string name="avatar_description">Аватар автора</string>
 </resources>
