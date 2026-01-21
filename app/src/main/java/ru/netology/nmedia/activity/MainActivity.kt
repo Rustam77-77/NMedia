@@ -1,62 +1,49 @@
 package ru.netology.nmedia.activity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import ru.netology.nmedia.R
+import ru.netology.nmedia.adapter.OnInteractionListener
+import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.util.NumberUtils
+import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
 
-        // Наблюдаем за изменениями данных
-        viewModel.data.observe(this) { post ->
-            with(binding) {
-                // Отображаем данные поста
-                authorTextView.text = post.author
-                contentTextView.text = post.content
-                publishedTextView.text = post.published
-
-                // Форматируем и отображаем счётчики
-                likesCountTextView.text = NumberUtils.formatCount(post.likes)
-                sharesCountTextView.text = NumberUtils.formatCount(post.reposts)
-                viewsCountTextView.text = NumberUtils.formatCount(post.views)
-
-                // Меняем иконку лайка в зависимости от состояния
-                likeButton.setIconResource(
-                    if (post.likedByMe) R.drawable.ic_liked_24
-                    else R.drawable.ic_like_24
-                )
-
-                // Меняем иконку репоста в зависимости от состояния
-                shareButton.setIconResource(
-                    if (post.repostedByMe) R.drawable.ic_shared_24
-                    else R.drawable.ic_share_24
-                )
+        val adapter = PostsAdapter(object : OnInteractionListener {
+            override fun onLike(post: Post) {
+                viewModel.likeById(post.id)
             }
-        }
 
-        // Обработчик нажатия на кнопку лайка
-        binding.likeButton.setOnClickListener {
-            viewModel.onLikeClicked()
-        }
+            override fun onShare(post: Post) {
+                viewModel.shareById(post.id)
+            }
 
-        // Обработчик нажатия на кнопку репоста
-        binding.shareButton.setOnClickListener {
-            viewModel.onShareClicked()
-        }
+            override fun onEdit(post: Post) {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Редактирование поста ${post.id}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
 
-        // Обработчик нажатия на кнопку просмотров
-        binding.viewsButton.setOnClickListener {
-            viewModel.onViewsClicked()
+            override fun onRemove(post: Post) {
+                viewModel.removeById(post.id)
+            }
+        })
+
+        binding.list.adapter = adapter
+
+        viewModel.data.observe(this) { posts ->
+            adapter.submitList(posts)
         }
     }
 }

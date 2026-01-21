@@ -1,4 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NMedia</string>
-    <string name="avatar_description">Аватар автора</string>
+    <string name="app_name">НМедиа</string>
+    <string name="avatar_description">Аватар</string>
+    <string name="menu_description">Меню</string>
+    <string name="like_description">Лайк</string>
+    <string name="share_description">Поделиться</string>
+    <string name="remove">Удалить</string>
+    <string name="edit">Редактировать</string>
 </resources>
