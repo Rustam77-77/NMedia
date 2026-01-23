@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_margin="8dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,52 +13,47 @@
             android:id="@+id/avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:contentDescription="@string/avatar_description"
+            android:contentDescription="@string/description_post_author_avatar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/ic_netology_48dp" />
         <TextView
             android:id="@+id/author"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/published"
             app:layout_constraintEnd_toStartOf="@+id/menu"
             app:layout_constraintStart_toEndOf="@+id/avatar"
-            app:layout_constraintTop_toTopOf="@+id/avatar"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Нетология. Университет интернет-профессий" />
+            tools:text="Нетология" />
         <TextView
             android:id="@+id/published"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textSize="14sp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/avatar"
             app:layout_constraintEnd_toStartOf="@+id/menu"
             app:layout_constraintStart_toEndOf="@+id/avatar"
             app:layout_constraintTop_toBottomOf="@+id/author"
             tools:text="21 мая в 18:36" />
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/menu"
+            style="@style/Widget.AppTheme.MenuButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/menu_description"
-            android:src="@drawable/ic_more_vert_24"
+            android:contentDescription="@string/description_post_menu"
+            app:icon="@drawable/ic_more_vert_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier"
+            android:id="@+id/header_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
@@ -70,43 +63,55 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:autoLink="web"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/barrier"
-            tools:text="Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу." />
+            app:layout_constraintTop_toBottomOf="@id/header_barrier"
+            tools:text="Текст поста" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/content_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="content" />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/like"
-            style="@style/Widget.Material3.Button.TextButton.Icon"
+            style="@style/Widget.AppTheme.LikeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:checkable="true"
-            android:contentDescription="@string/like_description"
-            android:minWidth="0dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:textColor="?attr/colorControlNormal"
-            app:icon="@drawable/ic_like_selector"
-            app:iconTint="?attr/colorControlNormal"
+            android:contentDescription="@string/description_post_like"
+            app:icon="@drawable/ic_like_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/content"
-            tools:text="999" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/share"
-            style="@style/Widget.Material3.Button.TextButton.Icon"
+            app:layout_constraintTop_toBottomOf="@id/content_barrier" />
+        <TextView
+            android:id="@+id/likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/share_description"
-            android:minWidth="0dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:textColor="?attr/colorControlNormal"
-            app:icon="@drawable/ic_share_24"
-            app:iconTint="?attr/colorControlNormal"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/like"
             app:layout_constraintStart_toEndOf="@+id/like"
             app:layout_constraintTop_toTopOf="@+id/like"
-            tools:text="997" />
+            tools:text="10" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/share"
+            style="@style/Widget.AppTheme.ShareButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/description_post_share"
+            app:icon="@drawable/ic_share_24"
+            app:layout_constraintStart_toEndOf="@+id/likes"
+            app:layout_constraintTop_toBottomOf="@id/content_barrier" />
+        <TextView
+            android:id="@+id/shares"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/share"
+            app:layout_constraintStart_toEndOf="@+id/share"
+            app:layout_constraintTop_toTopOf="@+id/share"
+            tools:text="5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

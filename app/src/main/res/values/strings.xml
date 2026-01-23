@@ -1,10 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NMedia</string>
-    <string name="avatar_description">Avatar</string>
-    <string name="menu_description">Menu</string>
-    <string name="like_description">Like</string>
-    <string name="share_description">Share</string>
-    <string name="remove">Remove</string>
-    <string name="edit">Edit</string>
+    <string name="post_text">Post text</string>
+    <string name="description_post_author_avatar">Author avatar</string>
+    <string name="description_post_menu">Post menu</string>
+    <string name="description_post_like">Like</string>
+    <string name="description_post_share">Share</string>
+    <string name="description_save">Save</string>
+    <string name="description_cancel">Cancel</string>
+    <string name="description_add_post">Add post</string>
+    <string name="menu_remove">Remove</string>
+    <string name="menu_edit">Edit</string>
+    <string name="error_empty_content">Content cannot be empty</string>
+    <string name="share_post">Share post</string>
 </resources>

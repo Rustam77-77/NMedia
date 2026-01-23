@@ -1,0 +1,24 @@
+<resources>
+    <style name="Widget.AppTheme.LikeButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/like_button_tint</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+    </style>
+    <style name="Widget.AppTheme.ShareButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+    </style>
+    <style name="Widget.AppTheme.MenuButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+    </style>
+    <style name="Widget.AppTheme.IconButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+</resources>
