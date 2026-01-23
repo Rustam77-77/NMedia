@@ -1,4 +1,5 @@
 package ru.netology.nmedia.activity
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,9 +13,11 @@ import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.viewmodel.PostViewModel
+
 class MainActivity : AppCompatActivity() {
     private val viewModel: PostViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -46,14 +49,20 @@ class MainActivity : AppCompatActivity() {
         }
         viewModel.edited.observe(this) { post ->
             if (post.id == 0L) {
-                binding.editPanel.visibility = View.GONE
+                // Режим создания нового поста
+                binding.editGroup.visibility = View.GONE
+                binding.editText.hint = getString(R.string.post_text)
                 return@observe
             }
+            // Режим редактирования
+            binding.editGroup.visibility = View.VISIBLE
+            binding.editContentPreview.text = post.content
             with(binding.editText) {
                 requestFocus()
                 setText(post.content)
+                setSelection(text.length) // Курсор в конец
             }
-            binding.editPanel.visibility = View.VISIBLE
+            AndroidUtils.showKeyboard(binding.editText)
         }
         binding.saveButton.setOnClickListener {
             with(binding.editText) {
@@ -72,16 +81,9 @@ class MainActivity : AppCompatActivity() {
                 AndroidUtils.hideKeyboard(this)
             }
         }
-        binding.cancelButton.setOnClickListener {
+        binding.cancelEdit.setOnClickListener {
+            viewModel.cancelEdit()
             with(binding.editText) {
-                viewModel.edit(
-                    Post(
-                        id = 0,
-                        author = "",
-                        content = "",
-                        published = ""
-                    )
-                )
                 setText("")
                 clearFocus()
                 AndroidUtils.hideKeyboard(this)
@@ -96,6 +98,11 @@ class MainActivity : AppCompatActivity() {
                     published = ""
                 )
             )
+
+            with(binding.editText) {
+                requestFocus()
+                AndroidUtils.showKeyboard(this)
+            }
         }
     }
 }

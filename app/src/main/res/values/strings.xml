@@ -8,8 +8,11 @@
     <string name="description_save">Save</string>
     <string name="description_cancel">Cancel</string>
     <string name="description_add_post">Add post</string>
+    <string name="description_edit_icon">Edit icon</string>
+    <string name="description_cancel_edit">Cancel edit</string>
     <string name="menu_remove">Remove</string>
     <string name="menu_edit">Edit</string>
     <string name="error_empty_content">Content cannot be empty</string>
     <string name="share_post">Share post</string>
+    <string name="edit_message">Edit message</string>
 </resources>

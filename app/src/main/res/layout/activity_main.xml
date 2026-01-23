@@ -10,15 +10,88 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/edit_panel"
+        app:layout_constraintBottom_toTopOf="@+id/barrier_bottom"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/card_post" />
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="edit_header,edit_text" />
+    <!-- Панель редактирования (скрыта по умолчанию) -->
+    <ImageView
+        android:id="@+id/edit_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/description_edit_icon"
+        android:src="@drawable/ic_edit_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_header"
+        app:tint="?attr/colorPrimary" />
+    <TextView
+        android:id="@+id/edit_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/edit_message"
+        android:textColor="?attr/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/edit_content_preview"
+        app:layout_constraintEnd_toStartOf="@+id/cancel_edit"
+        app:layout_constraintStart_toEndOf="@+id/edit_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+    <TextView
+        android:id="@+id/edit_content_preview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="?android:attr/textColorSecondary"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text"
+        app:layout_constraintEnd_toStartOf="@+id/cancel_edit"
+        app:layout_constraintStart_toEndOf="@+id/edit_icon"
+        app:layout_constraintTop_toBottomOf="@+id/edit_header"
+        tools:text="Текст редактируемого поста..." />
+    <ImageButton
+        android:id="@+id/cancel_edit"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/description_cancel_edit"
+        android:src="@drawable/ic_close_24"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_content_preview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_header"
+        app:tint="?attr/colorControlNormal" />
+    <!-- Разделитель -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/edit_content_preview" />
+    <!-- Группа для управления видимостью -->
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/edit_panel"
+        android:id="@+id/edit_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="edit_text,save_button,cancel_button" />
+        app:constraint_referenced_ids="edit_icon,edit_header,edit_content_preview,cancel_edit,divider"
+        tools:visibility="visible" />
+    <!-- Поле ввода -->
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="0dp"
@@ -30,6 +103,7 @@
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:maxLines="6"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/save_button"
         app:layout_constraintStart_toStartOf="parent" />
@@ -38,30 +112,20 @@
         style="@style/Widget.AppTheme.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:contentDescription="@string/description_save"
         app:icon="@drawable/ic_save_24"
         app:layout_constraintBottom_toBottomOf="@+id/edit_text"
-        app:layout_constraintEnd_toStartOf="@+id/cancel_button"
-        app:layout_constraintTop_toTopOf="@+id/edit_text" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/cancel_button"
-        style="@style/Widget.AppTheme.IconButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/description_cancel"
-        app:icon="@drawable/ic_cancel_24"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/edit_text" />
+    <!-- FAB кнопка -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:contentDescription="@string/description_add_post"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
