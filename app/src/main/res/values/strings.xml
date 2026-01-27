@@ -1,18 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- General app strings -->
     <string name="app_name">NMedia</string>
-    <string name="post_text">Post text</string>
-    <string name="description_post_author_avatar">Author avatar</string>
-    <string name="description_post_menu">Post menu</string>
-    <string name="description_post_like">Like</string>
-    <string name="description_post_share">Share</string>
-    <string name="description_save">Save</string>
-    <string name="description_cancel">Cancel</string>
-    <string name="description_add_post">Add post</string>
-    <string name="description_edit_icon">Edit icon</string>
-    <string name="description_cancel_edit">Cancel edit</string>
-    <string name="menu_remove">Remove</string>
-    <string name="menu_edit">Edit</string>
-    <string name="error_empty_content">Content cannot be empty</string>
-    <string name="share_post">Share post</string>
-    <string name="edit_message">Edit message</string>
+
+    <!-- Accessibility descriptions -->
+    <string name="avatar_description">Author avatar</string>
+    <string name="menu_description">Post menu</string>
+    <string name="like_description">Like</string>
+    <string name="share_description">Share</string>
+
+    <!-- User messages -->
+    <string name="share_success">Repost completed</string>
+
+    <!-- Menu items -->
+    <string name="remove">Remove</string>
+    <string name="edit">Edit</string>
 </resources>

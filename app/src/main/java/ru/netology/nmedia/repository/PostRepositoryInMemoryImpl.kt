@@ -3,17 +3,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
 class PostRepositoryInMemoryImpl : PostRepository {
+
     private var nextId = 1L
+
     private var posts = listOf(
         Post(
             id = nextId++,
-            author = "Нетология. Университет интернет-профессий",
+            author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             published = "21 мая в 18:36",
             likedByMe = false,
             likes = 999,
-            shares = 997,
-            views = 5
+            shares = 997
+        ),
+        Post(
+            id = nextId++,
+            author = "Нетология. Университет интернет-профессий будущего",
+            content = "Знаете, что общего между трендами и трамваем? Если не успеешь — можно остаться позади на несколько лет. Например, если вы не знаете, что такое Compose, MVVM или Kotlin Flow, вы рискуете оказаться в списке не самых актуальных специалистов на рынке.",
+            published = "18 мая в 12:00",
+            likedByMe = false,
+            likes = 20,
+            shares = 5
         )
     )
 
@@ -36,23 +46,6 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
     override fun removeById(id: Long) {
         posts = posts.filter { it.id != id }
-        data.value = posts
-    }
-    override fun save(post: Post) {
-        if (post.id == 0L) {
-            posts = listOf(
-                post.copy(
-                    id = nextId++,
-                    author = "Me",
-                    likedByMe = false,
-                    published = "now"
-                )
-            ) + posts
-        } else {
-            posts = posts.map {
-                if (it.id != post.id) it else it.copy(content = post.content)
-            }
-        }
         data.value = posts
     }
 }

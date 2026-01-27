@@ -1,24 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.AppTheme.LikeButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">@color/like_button_tint</item>
+
+    <!-- Базовый стиль для кнопки с иконкой и текстом -->
+    <style name="Widget.App.Button.IconWithText" parent="Widget.Material3.Button.TextButton">
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">8dp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:minWidth">0dp</item>
-        <item name="android:paddingStart">12dp</item>
-        <item name="android:paddingEnd">12dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
     </style>
-    <style name="Widget.AppTheme.ShareButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:paddingStart">12dp</item>
-        <item name="android:paddingEnd">12dp</item>
+    <!-- Базовый стиль для кнопки только с иконкой -->
+    <style name="Widget.App.Button.IconOnly" parent="Widget.Material3.Button.IconButton">
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
     </style>
-    <style name="Widget.AppTheme.MenuButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:paddingStart">12dp</item>
-        <item name="android:paddingEnd">12dp</item>
-    </style>
-    <style name="Widget.AppTheme.IconButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="android:minWidth">0dp</item>
-    </style>
+    <!-- Стиль для кнопки меню -->
+    <style name="Widget.AppTheme.MenuButton" parent="Widget.App.Button.IconOnly" />
+    <!-- Стиль для кнопки Like -->
+    <style name="Widget.AppTheme.LikeButton" parent="Widget.App.Button.IconWithText" />
+    <!-- Стиль для кнопки Share -->
+    <style name="Widget.AppTheme.ShareButton" parent="Widget.App.Button.IconWithText" />
 </resources>
