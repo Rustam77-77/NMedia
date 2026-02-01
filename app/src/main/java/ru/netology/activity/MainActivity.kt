@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
                     viewModel.save()
                 }
             }
+        } else {
+            // Сбрасываем состояние редактирования при отмене
+            viewModel.cancelEdit()
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
