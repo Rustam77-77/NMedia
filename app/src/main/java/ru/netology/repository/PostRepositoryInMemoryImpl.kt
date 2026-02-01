@@ -13,7 +13,18 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "21 мая в 18:36",
             likedByMe = false,
             likes = 999,
-            shares = 997
+            shares = 997,
+            video = "https://rutube.ru/video/f8b0e7e0b5f6b8c7a1d2e3f4g5h6i7j8/"
+        ),
+        Post(
+            id = nextId++,
+            author = "Разработчик Android",
+            content = "Изучаем Android разработку вместе!",
+            published = "22 мая в 10:00",
+            likedByMe = false,
+            likes = 150,
+            shares = 50,
+            video = null  // Пост без видео
         )
     )
 
@@ -40,7 +51,6 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
     override fun save(post: Post) {
         if (post.id == 0L) {
-            // Создание нового поста
             posts = listOf(
                 post.copy(
                     id = nextId++,
@@ -49,9 +59,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 )
             ) + posts
         } else {
-            // Редактирование существующего поста
             posts = posts.map {
-                if (it.id != post.id) it else it.copy(content = post.content)
+                if (it.id != post.id) it else it.copy(
+                    content = post.content,
+                    video = post.video
+                )
             }
         }
         data.value = posts

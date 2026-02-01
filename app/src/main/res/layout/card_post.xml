@@ -75,12 +75,51 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header_barrier"
             tools:text="@tools:sample/lorem/random" />
+        <!-- ВИДЕО БЛОК -->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/videoGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="videoContainer" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/videoContainer"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/content">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#E0E0E0">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/video_preview"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/video_placeholder"
+                    app:tint="#9E9E9E" />
+                <ImageButton
+                    android:id="@+id/playButton"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/play_video"
+                    app:srcCompat="@drawable/ic_play_circle_24"
+                    app:tint="?attr/colorPrimary" />
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/content_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="content" />
+            app:constraint_referenced_ids="content,videoContainer" />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/likes"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"

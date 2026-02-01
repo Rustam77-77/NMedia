@@ -24,6 +24,13 @@
     <string name="edit_description">Edit post</string>
     <string name="delete_description">Delete post</string>
 
+    <!-- Video -->
+    <string name="video_preview">Video preview</string>
+    <string name="play_video">Play video</string>
+    <string name="video_url">Video URL (optional)</string>
+
     <!-- Messages -->
     <string name="share_success">Shared successfully</string>
+    <string name="error_empty_content">Please enter post text</string>
+    <string name="error_play_video">Cannot open video</string>
 </resources>

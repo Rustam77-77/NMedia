@@ -7,17 +7,21 @@ import ru.netology.nmedia.databinding.ActivityPostEditBinding
 class PostEditActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_CONTENT = "content"
+        const val EXTRA_VIDEO = "video"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityPostEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val initialContent = intent.getStringExtra(EXTRA_CONTENT)
+        val initialVideo = intent.getStringExtra(EXTRA_VIDEO)
 
         binding.edit.apply {
             setText(initialContent)
             requestFocus()
         }
+
+        binding.editVideo.setText(initialVideo)
         title = if (initialContent != null) {
             getString(R.string.edit)
         } else {
@@ -25,13 +29,18 @@ class PostEditActivity : AppCompatActivity() {
         }
         binding.ok.setOnClickListener {
             val content = binding.edit.text.toString()
+            val video = binding.editVideo.text.toString().trim()
+
             if (content.isNotBlank()) {
                 val resultIntent = Intent().apply {
                     putExtra(EXTRA_CONTENT, content)
+                    if (video.isNotBlank()) {
+                        putExtra(EXTRA_VIDEO, video)
+                    }
                 }
                 setResult(RESULT_OK, resultIntent)
+                finish()
             }
-            finish()
         }
         binding.cancel.setOnClickListener {
             setResult(RESULT_CANCELED)
