@@ -5,7 +5,6 @@ import ru.netology.nmedia.dto.Post
 class PostRepositoryInMemoryImpl : PostRepository {
 
     private var nextId = 1L
-
     private var posts = listOf(
         Post(
             id = nextId++,
@@ -15,15 +14,6 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 999,
             shares = 997
-        ),
-        Post(
-            id = nextId++,
-            author = "Нетология. Университет интернет-профессий будущего",
-            content = "Знаете, что общего между трендами и трамваем? Если не успеешь — можно остаться позади на несколько лет. Например, если вы не знаете, что такое Compose, MVVM или Kotlin Flow, вы рискуете оказаться в списке не самых актуальных специалистов на рынке.",
-            published = "18 мая в 12:00",
-            likedByMe = false,
-            likes = 20,
-            shares = 5
         )
     )
 
@@ -46,6 +36,24 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
     override fun removeById(id: Long) {
         posts = posts.filter { it.id != id }
+        data.value = posts
+    }
+    override fun save(post: Post) {
+        if (post.id == 0L) {
+            // Создание нового поста
+            posts = listOf(
+                post.copy(
+                    id = nextId++,
+                    author = "Я",
+                    published = "Только что"
+                )
+            ) + posts
+        } else {
+            // Редактирование существующего поста
+            posts = posts.map {
+                if (it.id != post.id) it else it.copy(content = post.content)
+            }
+        }
         data.value = posts
     }
 }

@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- General app strings -->
+    <!-- App name -->
     <string name="app_name">NMedia</string>
 
-    <!-- Accessibility descriptions -->
-    <string name="avatar_description">Author avatar</string>
-    <string name="menu_description">Post menu</string>
-    <string name="like_description">Like</string>
-    <string name="share_description">Share</string>
-
-    <!-- User messages -->
-    <string name="share_success">Repost completed</string>
-
-    <!-- Menu items -->
+    <!-- Post actions -->
+    <string name="add_post">Add post</string>
+    <string name="post_text">Post text</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
     <string name="remove">Remove</string>
     <string name="edit">Edit</string>
+    <string name="action_save">Save</string>
+
+    <!-- Content descriptions -->
+    <string name="description_post_author_avatar">Post author avatar</string>
+    <string name="description_post_menu">Post menu</string>
+    <string name="description_post_like">Like</string>
+    <string name="description_post_share">Share</string>
+    <string name="avatar_description">Avatar</string>
+    <string name="menu_description">Menu</string>
+    <string name="like_description">Like post</string>
+    <string name="share_description">Share post</string>
+    <string name="edit_description">Edit post</string>
+    <string name="delete_description">Delete post</string>
+
+    <!-- Messages -->
+    <string name="share_success">Shared successfully</string>
 </resources>

@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Общие строки приложения -->
-    <string name="app_name">НМедиа</string>
+    <!-- App name -->
+    <string name="app_name">NMedia</string>
 
-    <!-- Описания для accessibility -->
-    <string name="avatar_description">Аватар автора</string>
-    <string name="menu_description">Меню поста</string>
-    <string name="like_description">Лайк</string>
-    <string name="share_description">Поделиться</string>
-
-    <!-- Сообщения для пользователя -->
-    <string name="share_success">Репост выполнен</string>
-
-    <!-- Меню -->
+    <!-- Post actions -->
+    <string name="add_post">Добавить пост</string>
+    <string name="post_text">Текст поста</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
     <string name="remove">Удалить</string>
     <string name="edit">Редактировать</string>
+    <string name="action_save">Сохранить</string>
+
+    <!-- Content descriptions -->
+    <string name="description_post_author_avatar">Аватар автора поста</string>
+    <string name="description_post_menu">Меню поста</string>
+    <string name="description_post_like">Лайк</string>
+    <string name="description_post_share">Поделиться</string>
+    <string name="avatar_description">Аватар</string>
+    <string name="menu_description">Меню</string>
+    <string name="like_description">Лайкнуть пост</string>
+    <string name="share_description">Поделиться постом</string>
+    <string name="edit_description">Редактировать пост</string>
+    <string name="delete_description">Удалить пост</string>
+
+    <!-- Messages -->
+    <string name="share_success">Поделились успешно</string>
 </resources>

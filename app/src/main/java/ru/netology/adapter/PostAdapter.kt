@@ -11,11 +11,13 @@ import ru.netology.nmedia.dto.Post
 interface OnInteractionListener {
     fun onLike(post: Post)
     fun onShare(post: Post)
+    fun onEdit(post: Post)
     fun onRemove(post: Post)
 }
 class PostsAdapter(
     private val onInteractionListener: OnInteractionListener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -38,24 +40,27 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
+            likes.text = formatCount(post.likes)
+            shares.text = formatCount(post.shares)
 
-            like.isChecked = post.likedByMe
-            like.text = formatCount(post.likes)
-
-            share.text = formatCount(post.shares)
-            like.setOnClickListener {
+            likes.isChecked = post.likedByMe
+            likes.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
-            share.setOnClickListener {
+            shares.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
-                    inflate(R.menu.options_post)
+                    inflate(R.menu.menu_post)
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.remove -> {
                                 onInteractionListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
                                 true
                             }
                             else -> false
@@ -67,9 +72,17 @@ class PostViewHolder(
     }
     private fun formatCount(count: Int): String {
         return when {
-            count >= 1_000_000 -> String.format("%.1fM", count / 1_000_000.0)
-            count >= 10_000 -> "${count / 1_000}K"
-            count >= 1_000 -> String.format("%.1fK", count / 1_000.0)
+            count >= 1_000_000 -> {
+                val millions = count / 1_000_000
+                val remainder = (count % 1_000_000) / 100_000
+                if (remainder == 0) "${millions}M" else "${millions}.${remainder}M"
+            }
+            count >= 10_000 -> "${count / 1000}K"
+            count >= 1_000 -> {
+                val thousands = count / 1000
+                val remainder = (count % 1000) / 100
+                if (remainder == 0) "${thousands}K" else "${thousands}.${remainder}K"
+            }
             else -> count.toString()
         }
     }
