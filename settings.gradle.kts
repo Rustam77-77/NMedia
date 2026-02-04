@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "NMedia"
-include(":app")
+rootProject.name = "notes-app"
+include(":servlets")

@@ -1,14 +1,13 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-parcelize")
 }
 android {
-    namespace = "ru.netology.nmedia"
+    namespace = "ru.netology"
     compileSdk = 34
     defaultConfig {
-        applicationId = "ru.netology.nmedia"
-        minSdk = 23
+        applicationId = "ru.netology"
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -25,24 +24,16 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
+
     buildFeatures {
         viewBinding = true
-    }
-    // Добавьте этот блок
-    lint {
-        abortOnError = false
-        checkReleaseBuilds = false
-        disable += listOf(
-            "MissingTranslation",
-            "ExtraTranslation"
-        )
     }
 }
 dependencies {
@@ -50,14 +41,15 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
-    // ViewModel and LiveData
+    // ViewModel и LiveData
+    implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
-    implementation("androidx.activity:activity-ktx:1.8.2")
 
-    // RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    // Gson для работы с JSON
+    implementation("com.google.code.gson:gson:2.10.1")  // ← ДОБАВЬТЕ ЭТУ СТРОКУ
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
