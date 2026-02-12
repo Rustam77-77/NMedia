@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "notes-app"
-include(":servlets")
+include(":app")
