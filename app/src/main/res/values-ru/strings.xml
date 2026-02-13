@@ -1,29 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App name -->
-    <string name="app_name">NMedia</string>
+    <string name="app_name">Посты Нетологии</string>
 
-    <!-- Post actions -->
-    <string name="add_post">Добавить пост</string>
-    <string name="post_text">Текст поста</string>
-    <string name="save">Сохранить</string>
-    <string name="cancel">Отмена</string>
+    <!-- Accessibility descriptions -->
+    <string name="avatar_description">Аватар автора</string>
+    <string name="menu_description">Меню действий</string>
+    <string name="like_description">Лайк</string>
+    <string name="share_description">Поделиться</string>
+    <string name="views_description">Просмотры</string>
+    <string name="video_description">Видео</string>
+
+    <!-- Menu actions -->
     <string name="remove">Удалить</string>
     <string name="edit">Редактировать</string>
-    <string name="action_save">Сохранить</string>
 
-    <!-- Content descriptions -->
-    <string name="description_post_author_avatar">Аватар автора поста</string>
-    <string name="description_post_menu">Меню поста</string>
-    <string name="description_post_like">Лайк</string>
-    <string name="description_post_share">Поделиться</string>
-    <string name="avatar_description">Аватар</string>
-    <string name="menu_description">Меню</string>
-    <string name="like_description">Лайкнуть пост</string>
-    <string name="share_description">Поделиться постом</string>
-    <string name="edit_description">Редактировать пост</string>
-    <string name="delete_description">Удалить пост</string>
+    <!-- Post actions -->
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="post_content_hint">Текст поста</string>
+    <string name="empty_posts">Нет постов</string>
 
-    <!-- Messages -->
-    <string name="share_success">Поделились успешно</string>
+    <!-- Titles -->
+    <string name="new_post">Новый пост</string>
+    <string name="edit_post">Редактировать пост</string>
+    <string name="post_details">Детали поста</string>
 </resources>

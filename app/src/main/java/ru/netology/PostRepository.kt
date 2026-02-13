@@ -1,11 +1,15 @@
-package ru.netology.repository
+package ru.netology
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.netology.dto.Post
-class PostRepositoryInMemory : PostRepository {
-
+interface PostRepository {
+    fun getAll(): LiveData<List<Post>>
+    fun likeById(id: Long)
+    fun shareById(id: Long)
+    fun removeById(id: Long)
+    fun save(post: Post)
+}
+class PostRepositoryImpl : PostRepository {
     private var nextId = 1L
-
     private var posts = listOf(
         Post(
             id = nextId++,
@@ -14,41 +18,32 @@ class PostRepositoryInMemory : PostRepository {
             published = "21 мая в 18:36",
             likes = 999,
             shares = 997,
-            views = 5
+            views = 5000
         ),
         Post(
             id = nextId++,
-            author = "Нетология. Университет интернет-профессий будущего",
-            content = "Знаковое событие для нас: мы запускаем новый курс Java-разработчик! Курс для тех, кто хочет освоить востребованную профессию с нуля.",
+            author = "Нетология",
+            content = "Знаний хватит на всех: на следующей неделе разбираемся с основами Android-разработки!",
             published = "18 сентября в 10:12",
-            likes = 1_200_000,
-            shares = 1_000_000,
-            views = 50_000_000
+            likes = 10,
+            shares = 5,
+            views = 150
         )
     )
-
     private val data = MutableLiveData(posts)
     override fun getAll(): LiveData<List<Post>> = data
     override fun likeById(id: Long) {
-        posts = posts.map { post ->
-            if (post.id == id) {
-                post.copy(
-                    likes = if (post.likedByMe) post.likes - 1 else post.likes + 1,
-                    likedByMe = !post.likedByMe
-                )
-            } else {
-                post
-            }
+        posts = posts.map {
+            if (it.id != id) it else it.copy(
+                likedByMe = !it.likedByMe,
+                likes = if (it.likedByMe) it.likes - 1 else it.likes + 1
+            )
         }
         data.value = posts
     }
     override fun shareById(id: Long) {
-        posts = posts.map { post ->
-            if (post.id == id) {
-                post.copy(shares = post.shares + 1)
-            } else {
-                post
-            }
+        posts = posts.map {
+            if (it.id != id) it else it.copy(shares = it.shares + 1)
         }
         data.value = posts
     }
@@ -58,18 +53,12 @@ class PostRepositoryInMemory : PostRepository {
     }
     override fun save(post: Post) {
         if (post.id == 0L) {
-            // Создание нового поста
             posts = listOf(
-                post.copy(
-                    id = nextId++,
-                    author = "Me",
-                    published = "now"
-                )
+                post.copy(id = nextId++, author = "Me", published = "now")
             ) + posts
         } else {
-            // Редактирование существующего
             posts = posts.map {
-                if (it.id == post.id) post else it
+                if (it.id != post.id) it else it.copy(content = post.content)
             }
         }
         data.value = posts
