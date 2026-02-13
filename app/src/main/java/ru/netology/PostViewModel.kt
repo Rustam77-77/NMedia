@@ -14,9 +14,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _editedPost = MutableLiveData<Post?>(null)
     val editedPost: LiveData<Post?> = _editedPost
+    // Черновик для нового поста
+    private val _draftContent = MutableLiveData<String?>()
+    val draftContent: LiveData<String?> = _draftContent
     init {
         viewModelScope.launch {
-            // Проверяем, есть ли данные, если нет — добавляем начальные
             if (data.value.isNullOrEmpty()) {
                 (repository as? PostRepositoryImpl)?.insertInitialData()
             }
@@ -51,6 +53,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             )
             repository.save(post)
             _editedPost.value = null
+            _draftContent.value = null // Очищаем черновик после сохранения
         }
     }
     fun edit(post: Post) {
@@ -59,4 +62,14 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun cancelEdit() {
         _editedPost.value = null
     }
+    // Сохранить черновик
+    fun saveDraft(content: String) {
+        _draftContent.value = content
+    }
+    // Очистить черновик
+    fun clearDraft() {
+        _draftContent.value = null
+    }
+    // Получить черновик
+    fun getDraft(): String? = _draftContent.value
 }
