@@ -9,17 +9,13 @@
         android:theme="@style/Theme.Material3.DayNight">
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".activity.PostEditActivity"
-            android:exported="false" />
 
     </application>
 </manifest>

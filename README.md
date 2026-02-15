@@ -1,30 +1,30 @@
-# NMedia
-
-Учебный проект Android-приложения для курса Нетологии "Android-разработчик с нуля".
-
-## Описание
-
-Приложение для социальной сети с функционалом просмотра постов.
-
+# Android Posts App
+Приложение для работы с постами — домашнее задание курса "Android-разработчик" от Нетология.
+## Функциональность
+- ✅ Просмотр списка постов
+- ✅ Лайк и репост постов
+- ✅ Создание нового поста
+- ✅ Редактирование поста
+- ✅ Удаление поста
+- ✅ Просмотр деталей поста
+- ✅ Навигация между экранами
 ## Технологии
-
 - Kotlin
-- Android SDK (API 23+)
-- ConstraintLayout
+- Jetpack Navigation
+- ViewModel + LiveData
 - ViewBinding
-- Material Design Components
-
-## Сборка проекта
-
-### Требования
-
-- Android Studio Hedgehog (2023.1.1) или новее
-- JDK 17
-- Android SDK 34
-
-### Команды для сборки
-
-```bash
-./gradlew clean
-./gradlew build
-./gradlew assembleDebug
+- RecyclerView
+- Material Design 3
+## Архитектура
+- MVVM (Model-View-ViewModel)
+- Repository pattern
+- Single Activity + Multiple Fragments
+## Скриншоты
+(Здесь можно добавить скриншоты приложения)
+## Как запустить
+1. Клонировать репозиторий
+2. Открыть проект в Android Studio
+3. Sync проект с Gradle
+4. Запустить на эмуляторе или устройстве
+## Автор
+Рустам Мазитов — студент курса Нетология
