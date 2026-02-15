@@ -1,13 +1,17 @@
-package ru.netology
+package ru.netology.fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import ru.netology.R
+import ru.netology.adapter.OnInteractionListener
+import ru.netology.adapter.PostsAdapter
+import ru.netology.data.Post
 import ru.netology.databinding.FragmentFeedBinding
+import ru.netology.viewmodel.PostViewModel
 class FeedFragment : Fragment() {
     private val viewModel: PostViewModel by activityViewModels()
     override fun onCreateView(
@@ -20,27 +24,18 @@ class FeedFragment : Fragment() {
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
             }
-            override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
+            override fun onEdit(post: Post) {
+                viewModel.edit(post)
+                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
             }
             override fun onRemove(post: Post) {
                 viewModel.removeById(post.id)
             }
-            override fun onEdit(post: Post) {
-                viewModel.edit(post)
-                findNavController().navigate(
-                    R.id.action_feedFragment_to_editPostFragment,
-                    bundleOf("initialContent" to post.content)
-                )
-            }
-            override fun onPostClick(post: Post) {
-                findNavController().navigate(
-                    R.id.action_feedFragment_to_postDetailFragment,
-                    bundleOf("postId" to post.id)
-                )
+            override fun onShare(post: Post) {
+                viewModel.shareById(post.id)
             }
         })
-        binding.postsRecyclerView.adapter = adapter
+        binding.list.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             adapter.submitList(posts)
         }

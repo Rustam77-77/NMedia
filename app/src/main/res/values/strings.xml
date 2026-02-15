@@ -1,26 +1,36 @@
 <resources>
-    <string name="app_name">Netology Posts</string>
+    <string name="app_name">Netology</string>
 
-    <!-- Accessibility descriptions -->
-    <string name="avatar_description">Author avatar</string>
-    <string name="menu_description">Action menu</string>
-    <string name="like_description">Like</string>
-    <string name="share_description">Share</string>
-    <string name="views_description">Views</string>
-    <string name="video_description">Video</string>
+    <!-- Navigation -->
+    <string name="feed">Feed</string>
+    <string name="new_post">New Post</string>
+    <string name="edit_post">Edit Post</string>
 
-    <!-- Menu actions -->
-    <string name="remove">Remove</string>
-    <string name="edit">Edit</string>
-
-    <!-- Post actions -->
+    <!-- Post -->
+    <string name="post_text">Post text</string>
+    <string name="post_content_hint">Enter post text…</string>
+    <string name="add_post">Add post</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="post_content_hint">Post text</string>
+    <string name="like">Like</string>
+    <string name="share">Share</string>
+    <string name="views">Views</string>
+    <string name="remove">Remove</string>
+    <string name="edit">Edit</string>
+    <string name="menu">Menu</string>
+    <string name="avatar">Avatar</string>
+    <string name="post_details">Post details</string>
     <string name="empty_posts">No posts</string>
 
-    <!-- Titles -->
-    <string name="new_post">New post</string>
-    <string name="edit_post">Edit post</string>
-    <string name="post_details">Post details</string>
+    <!-- Descriptions -->
+    <string name="avatar_description">User avatar</string>
+    <string name="menu_description">Options menu</string>
+    <string name="like_description">Like post</string>
+    <string name="share_description">Share post</string>
+    <string name="views_description">Number of views</string>
+    <string name="video_description">Video</string>
+
+    <!-- Draft -->
+    <string name="draft_saved">Draft saved</string>
+    <string name="draft_restored">Draft restored</string>
 </resources>

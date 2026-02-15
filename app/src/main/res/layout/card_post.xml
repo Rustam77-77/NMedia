@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_margin="8dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,18 +14,18 @@
             android:id="@+id/avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:contentDescription="@string/avatar_description"
+            android:contentDescription="@string/avatar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/ic_avatar_24" />
         <TextView
             android:id="@+id/author"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
-            android:maxLines="1"
+            android:singleLine="true"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/published"
             app:layout_constraintEnd_toStartOf="@id/menu"
@@ -39,25 +38,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:maxLines="1"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="@id/avatar"
             app:layout_constraintEnd_toStartOf="@id/menu"
             app:layout_constraintStart_toEndOf="@id/avatar"
             app:layout_constraintTop_toBottomOf="@id/author"
-            tools:text="21 мая в 18:36" />
+            tools:text="21.05.2022 18:36" />
         <ImageButton
             android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/menu_description"
-            android:src="@drawable/ic_more_vert_24"
+            android:contentDescription="@string/menu"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_more_vert_24" />
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier"
+            android:id="@+id/header_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
@@ -70,65 +67,46 @@
             android:autoLink="web"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrier"
-            tools:text="@tools:sample/lorem/random" />
-        <ImageButton
-            android:id="@+id/like"
+            app:layout_constraintTop_toBottomOf="@id/header_barrier"
+            tools:text="Текст поста" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/content_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/like_description"
-            android:src="@drawable/ic_favorite_border_24"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="content" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/likes"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:checkable="true"
+            android:contentDescription="@string/like"
+            app:icon="@drawable/ic_like_selector"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/content" />
-        <TextView
-            android:id="@+id/likeCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/like"
-            app:layout_constraintStart_toEndOf="@id/like"
-            app:layout_constraintTop_toTopOf="@id/like"
+            app:layout_constraintTop_toBottomOf="@id/content_barrier"
             tools:text="10" />
-        <ImageButton
-            android:id="@+id/share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/share_description"
-            android:src="@drawable/ic_share_24"
-            app:layout_constraintBottom_toBottomOf="@id/like"
-            app:layout_constraintStart_toEndOf="@id/likeCount"
-            app:layout_constraintTop_toTopOf="@id/like" />
-        <TextView
-            android:id="@+id/shareCount"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/shares"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/share"
-            app:layout_constraintStart_toEndOf="@id/share"
-            app:layout_constraintTop_toTopOf="@id/share"
+            android:contentDescription="@string/share"
+            app:icon="@drawable/ic_share_24"
+            app:layout_constraintStart_toEndOf="@id/likes"
+            app:layout_constraintTop_toTopOf="@id/likes"
             tools:text="5" />
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/views"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/views_description"
-            android:src="@drawable/ic_visibility_24"
-            app:layout_constraintBottom_toBottomOf="@id/like"
-            app:layout_constraintEnd_toStartOf="@id/viewsCount"
-            app:layout_constraintTop_toTopOf="@id/like" />
-        <TextView
-            android:id="@+id/viewsCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/views"
+            android:contentDescription="@string/views"
+            app:icon="@drawable/ic_visibility_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/views"
-            tools:text="1000" />
+            app:layout_constraintTop_toTopOf="@id/likes"
+            tools:text="100" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

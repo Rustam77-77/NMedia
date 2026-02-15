@@ -1,23 +1,25 @@
-package ru.netology
+package ru.netology.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.databinding.ItemPostBinding
+import ru.netology.R
+import ru.netology.data.Post
+import ru.netology.databinding.CardPostBinding
+import java.text.SimpleDateFormat
+import java.util.*
 interface OnInteractionListener {
     fun onLike(post: Post)
-    fun onShare(post: Post)
-    fun onRemove(post: Post)
     fun onEdit(post: Post)
-    fun onPostClick(post: Post)
+    fun onRemove(post: Post)
+    fun onShare(post: Post)
 }
 class PostsAdapter(
     private val onInteractionListener: OnInteractionListener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val binding = ItemPostBinding.inflate(
+        val binding = CardPostBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -30,58 +32,55 @@ class PostsAdapter(
     }
 }
 class PostViewHolder(
-    private val binding: ItemPostBinding,
+    private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
             author.text = post.author
-            published.text = post.published
+            published.text = formatDate(post.published)
             content.text = post.content
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_favorite_24
-                else R.drawable.ic_favorite_border_24
-            )
-            likeCount.text = formatCount(post.likes)
-            shareCount.text = formatCount(post.shares)
-            viewsCount.text = formatCount(post.views)
-            root.setOnClickListener {
-                onInteractionListener.onPostClick(post)
-            }
-            like.setOnClickListener {
+
+            likes.text = formatCount(post.likes)
+            likes.isChecked = post.likedByMe
+
+            shares.text = formatCount(post.shares)
+            views.text = formatCount(post.views)
+            likes.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
-            share.setOnClickListener {
+            shares.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
             menu.setOnClickListener {
-                showPopupMenu(it, post)
+                androidx.appcompat.widget.PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
             }
         }
     }
-    private fun showPopupMenu(view: android.view.View, post: Post) {
-        PopupMenu(view.context, view).apply {
-            inflate(R.menu.post_options_menu)
-            setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.remove -> {
-                        onInteractionListener.onRemove(post)
-                        true
-                    }
-                    R.id.edit -> {
-                        onInteractionListener.onEdit(post)
-                        true
-                    }
-                    else -> false
-                }
-            }
-        }.show()
+    private fun formatDate(timestamp: Long): String {
+        val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
+        return sdf.format(Date(timestamp))
     }
     private fun formatCount(count: Int): String {
         return when {
             count >= 1_000_000 -> String.format("%.1fM", count / 1_000_000.0)
-            count >= 10_000 -> "${count / 1000}K"
-            count >= 1_000 -> String.format("%.1fK", count / 1000.0)
+            count >= 10_000 -> "${count / 1_000}K"
+            count >= 1_000 -> String.format("%.1fK", count / 1_000.0)
             else -> count.toString()
         }
     }
