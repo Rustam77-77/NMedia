@@ -3,11 +3,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import ru.netology.dao.DraftDao
+import ru.netology.dao.PostDao
 import ru.netology.data.Draft
 import ru.netology.data.Post
-import ru.netology.db.AppDb
+import ru.netology.db.AppDbHelper
 import ru.netology.repository.PostRepository
 import ru.netology.repository.PostRepositoryImpl
 class PostViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,8 +20,10 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val _navigateToFeed = MutableLiveData<Unit>()
     val navigateToFeed: LiveData<Unit> = _navigateToFeed
     init {
-        val db = AppDb.getInstance(application)
-        repository = PostRepositoryImpl(db.postDao(), db.draftDao())
+        val dbHelper = AppDbHelper(application)
+        val postDao = PostDao(dbHelper)
+        val draftDao = DraftDao(dbHelper)
+        repository = PostRepositoryImpl(postDao, draftDao)
         data = repository.getAll()
         draft = repository.getDraft()
     }
@@ -30,18 +32,17 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         if (trimmedContent.isEmpty()) {
             return
         }
-        viewModelScope.launch {
-            val post = _editedPost.value?.copy(content = trimmedContent)
-                ?: Post(
-                    author = "Я",
-                    content = trimmedContent,
-                    published = System.currentTimeMillis()
-                )
-            repository.save(post)
-            clearDraft()
-            _editedPost.value = null
-            _navigateToFeed.value = Unit
-        }
+        val post = _editedPost.value?.copy(content = trimmedContent)
+            ?: Post(
+                author = "Я",
+                content = trimmedContent,
+                published = System.currentTimeMillis()
+            )
+
+        repository.save(post)
+        clearDraft()
+        _editedPost.value = null
+        _navigateToFeed.value = Unit
     }
     fun edit(post: Post) {
         _editedPost.value = post
@@ -50,30 +51,20 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         _editedPost.value = null
     }
     fun removeById(id: Long) {
-        viewModelScope.launch {
-            repository.removeById(id)
-        }
+        repository.removeById(id)
     }
     fun likeById(id: Long) {
-        viewModelScope.launch {
-            repository.likeById(id)
-        }
+        repository.likeById(id)
     }
     fun shareById(id: Long) {
-        viewModelScope.launch {
-            repository.shareById(id)
-        }
+        repository.shareById(id)
     }
     fun saveDraft(content: String) {
         if (content.isNotBlank()) {
-            viewModelScope.launch {
-                repository.saveDraft(content)
-            }
+            repository.saveDraft(content)
         }
     }
     fun clearDraft() {
-        viewModelScope.launch {
-            repository.clearDraft()
-        }
+        repository.clearDraft()
     }
 }

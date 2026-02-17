@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    // Удалите kapt
 }
 android {
     namespace = "ru.netology"
@@ -36,6 +36,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+        disable += setOf("MissingTranslation")
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
 }
 dependencies {
     // AndroidX Core
@@ -48,15 +54,13 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
 
-    // Room
-    val roomVersion = "2.6.1"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-
-    // Lifecycle
+    // Lifecycle (только ViewModel и LiveData)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

@@ -17,7 +17,7 @@ class NewPostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentNewPostBinding.inflate(inflater, container, false)
-        // Восстановление черновика или редактируемого поста
+        // Восстановление редактируемого поста
         viewModel.editedPost.observe(viewLifecycleOwner) { post ->
             if (post != null) {
                 binding.edit.setText(post.content)
