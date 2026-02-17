@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "NetologyPosts"
+rootProject.name = "NetologyNotifications"
 include(":app")

@@ -1,44 +1,46 @@
-# Netology Android App - SQL и SQLite
-Мобильное приложение для создания и управления постами с использованием SQLite.
-## Функциональность
-- ✅ Создание, редактирование и удаление постов
-- ✅ Лайки и репосты
-- ✅ Сохранение черновиков при выходе из формы
-- ✅ Хранение данных в SQLite через Room
-- ✅ Navigation Component для навигации
-- ✅ MVVM архитектура
-## Технологии
-- Kotlin
-- Room Database
-- LiveData & ViewModel
-- Navigation Component
-- ViewBinding
-- Coroutines
-- Material Design 3
-## Требования
-- Android Studio Hedgehog | 2023.1.1 или новее
-- Kotlin 1.9+
-- Gradle 8.0+
-- Min SDK 24
-- Target SDK 34
-## Установка
-1. Клонируйте репозиторий
-2. Откройте проект в Android Studio
-3. Синхронизируйте Gradle
-4. Запустите приложение
-## Структура базы данных
-### Таблица `posts`
-- `id` - PRIMARY KEY
-- `author` - TEXT
-- `content` - TEXT
-- `published` - INTEGER (timestamp)
-- `likedByMe` - INTEGER (boolean)
-- `likes` - INTEGER
-- `shares` - INTEGER
-- `views` - INTEGER
-### Таблица `drafts`
-- `id` - PRIMARY KEY (всегда 1)
-- `content` - TEXT
-- `savedAt` - INTEGER (timestamp)
-## Автор
+# Домашнее задание 4.3 Notifications & Pushes
+## Описание решения
+Приложение демонстрирует обработку push-уведомлений с различными типами действий.
+## Решение задачи "Exceptions"
+### Проблема
+Если в приложение приходит Notification с полем `action`, которое не соответствует ни одному значению из `Enum Action`, возникает исключение при десериализации JSON.
+### Решение
+1. **Добавлено значение UNKNOWN в Enum Action**
+   - Используется как fallback для неизвестных действий
+   - Предотвращает краш приложения
+2. **Реализован кастомный десериализатор NotificationDeserializer**
+   - Безопасно обрабатывает некорректные значения
+   - Возвращает UNKNOWN для неизвестных action
+3. **Добавлена валидация в класс Notification**
+   - Метод `isValid()` проверяет корректность данных
+   - Метод `getDisplayText()` формирует читаемое описание
+4. **Реализован GsonHelper**
+   - Централизованная обработка JSON
+   - Логирование ошибок парсинга
+   - Try-catch блоки для предотвращения краша
+5. **Обработка в FCMService**
+   - Проверка валидности перед обработкой
+   - Показ общего уведомления для неизвестных типов
+   - Логирование для аналитики
+## Типы действий
+- **LIKE** - лайк поста
+- **COMMENT** - комментарий к посту
+- **SHARE** - поделились постом
+- **POST** - новый пост
+- **MENTION** - упоминание в посте
+- **UNKNOWN** - неизвестное действие (fallback)
+## Основные компоненты
+### Action.kt
+```kotlin
+enum class Action {
+    LIKE, COMMENT, SHARE, POST, MENTION, UNKNOWN;
+    
+    companion object {
+        fun fromString(value: String?): Action {
+            return values().find { 
+                it.name.equals(value, ignoreCase = true) 
+            } ?: UNKNOWN
+        }
+    }
+}
 Студент курса Нетология Рустам Мазитов

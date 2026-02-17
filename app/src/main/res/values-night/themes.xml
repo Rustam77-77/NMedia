@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Night theme -->
-    <style name="Theme.PostApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <!-- Dark theme -->
+    <style name="Theme.NetologyNotifications" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
