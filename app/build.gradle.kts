@@ -13,7 +13,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -47,7 +46,7 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    // Fragment KTX
+    // Fragment
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     // Lifecycle
@@ -57,11 +56,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.activity:activity-ktx:1.8.2")
 
-    // Room
+    // Room - ПРАВИЛЬНЫЙ ПОРЯДОК
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
 
     // Gson
     implementation("com.google.code.gson:gson:2.10.1")

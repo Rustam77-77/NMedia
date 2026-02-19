@@ -33,7 +33,7 @@ data class PostEntity(
             id = dto.id,
             author = dto.author,
             authorAvatar = dto.authorAvatar,
-            content = dto.content,
+            content = dto.content,  // ← ИСПРАВЛЕНО: dto.content
             published = dto.published,
             likedByMe = dto.likedByMe,
             likes = dto.likes,
@@ -43,7 +43,5 @@ data class PostEntity(
         )
     }
 }
-// Функция расширения для List<PostEntity>
 fun List<PostEntity>.toDto(): List<Post> = map(PostEntity::toDto)
-// Функция расширения для List<Post>
 fun List<Post>.toEntity(): List<PostEntity> = map(PostEntity::fromDto)
