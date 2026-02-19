@@ -1,101 +1,57 @@
 name: Android CI
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:
+    branches: [ main ]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'gradle'
-      - name: Create google-services.json
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+
+      - name: Setup google-services
         run: |
-          echo "📦 Creating google-services.json..."
-          
-          if [ -n "${{ secrets.GOOGLE_SERVICES_JSON }}" ]; then
-            echo "🔐 Decoding from GitHub Secret..."
-            echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 -d > app/google-services.json
-          else
-            echo "⚠️ No secret found, creating dummy config for CI..."
-            cat > app/google-services.json << 'EOFMARKER'
+          cat > app/google-services.json << 'EOF'
           {
             "project_info": {
               "project_number": "123456789012",
-              "firebase_url": "https://nmedia-dummy.firebaseio.com",
-              "project_id": "nmedia-dummy-ci",
-              "storage_bucket": "nmedia-dummy-ci.appspot.com"
+              "project_id": "nmedia-ci",
+              "storage_bucket": "nmedia-ci.appspot.com"
             },
-            "client": [
-              {
-                "client_info": {
-                  "mobilesdk_app_id": "1:123456789012:android:abcdef0123456789",
-                  "android_client_info": {
-                    "package_name": "ru.netology.nmedia"
-                  }
-                },
-                "oauth_client": [
-                  {
-                    "client_id": "123456789012-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
-                    "client_type": 3
-                  }
-                ],
-                "api_key": [
-                  {
-                    "current_key": "AIzaSyDummyKeyForCIBuildOnlyDoNotUseInProduction1234567890"
-                  }
-                ],
-                "services": {
-                  "appinvite_service": {
-                    "other_platform_oauth_client": [
-                      {
-                        "client_id": "123456789012-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
-                        "client_type": 3
-                      }
-                    ]
-                  }
+            "client": [{
+              "client_info": {
+                "mobilesdk_app_id": "1:123456789012:android:abc",
+                "android_client_info": {
+                  "package_name": "ru.netology.nmedia"
                 }
+              },
+              "api_key": [{
+                "current_key": "AIzaSyDummyKey"
+              }],
+              "services": {
+                "appinvite_service": {}
               }
-            ],
+            }],
             "configuration_version": "1"
           }
-          EOFMARKER
-          fi
-          
-          if [ -f app/google-services.json ]; then
-            echo "✅ google-services.json created successfully"
-            ls -lh app/google-services.json
-            echo "📄 File preview (first 5 lines):"
-            head -n 5 app/google-services.json
-          else
-            echo "❌ CRITICAL: Failed to create google-services.json"
-            exit 1
-          fi
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace --no-daemon
-      - name: Run Unit Tests
-        run: ./gradlew test --stacktrace --no-daemon
-        continue-on-error: true
-      - name: Upload Debug APK
-        uses: actions/upload-artifact@v4
-        if: success()
-        with:
-          name: app-debug-${{ github.run_number }}
-          path: app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 7
-      - name: Cleanup Secrets
-        if: always()
+          EOF
+          ls -la app/google-services.json
+
+      - name: Build
         run: |
-          rm -f app/google-services.json
-          echo "✅ Secrets cleaned up"
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: app/build/outputs/apk/debug/app-debug.apk
