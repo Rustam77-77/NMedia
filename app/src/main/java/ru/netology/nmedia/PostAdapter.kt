@@ -1,23 +1,22 @@
-package ru.netology
+package ru.netology.nmedia
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.databinding.ItemPostBinding
+import ru.netology.nmedia.databinding.CardPostBinding
+import ru.netology.nmedia.dto.Post  // ← ДОБАВЬТЕ ЭТУ СТРОКУ
 interface OnInteractionListener {
     fun onLike(post: Post)
     fun onShare(post: Post)
     fun onRemove(post: Post)
     fun onEdit(post: Post)
-    fun onPostClick(post: Post)
 }
-class PostsAdapter(
+class PostAdapter(
     private val onInteractionListener: OnInteractionListener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val binding = ItemPostBinding.inflate(
+        val binding = CardPostBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -30,7 +29,7 @@ class PostsAdapter(
     }
 }
 class PostViewHolder(
-    private val binding: ItemPostBinding,
+    private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
@@ -38,16 +37,15 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
+
             like.setImageResource(
                 if (post.likedByMe) R.drawable.ic_favorite_24
                 else R.drawable.ic_favorite_border_24
             )
+
             likeCount.text = formatCount(post.likes)
             shareCount.text = formatCount(post.shares)
-            viewsCount.text = formatCount(post.views)
-            root.setOnClickListener {
-                onInteractionListener.onPostClick(post)
-            }
+            viewCount.text = formatCount(post.views)
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
@@ -55,33 +53,14 @@ class PostViewHolder(
                 onInteractionListener.onShare(post)
             }
             menu.setOnClickListener {
-                showPopupMenu(it, post)
+                // TODO: показать меню
             }
         }
-    }
-    private fun showPopupMenu(view: android.view.View, post: Post) {
-        PopupMenu(view.context, view).apply {
-            inflate(R.menu.post_options_menu)
-            setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.remove -> {
-                        onInteractionListener.onRemove(post)
-                        true
-                    }
-                    R.id.edit -> {
-                        onInteractionListener.onEdit(post)
-                        true
-                    }
-                    else -> false
-                }
-            }
-        }.show()
     }
     private fun formatCount(count: Int): String {
         return when {
             count >= 1_000_000 -> String.format("%.1fM", count / 1_000_000.0)
-            count >= 10_000 -> "${count / 1000}K"
-            count >= 1_000 -> String.format("%.1fK", count / 1000.0)
+            count >= 1_000 -> String.format("%.1fK", count / 1_000.0)
             else -> count.toString()
         }
     }

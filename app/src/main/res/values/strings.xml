@@ -1,26 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Netology Posts</string>
+    <!-- Приложение -->
+    <string name="app_name">NMedia</string>
 
-    <!-- Accessibility descriptions -->
-    <string name="avatar_description">Author avatar</string>
-    <string name="menu_description">Action menu</string>
-    <string name="like_description">Like</string>
-    <string name="share_description">Share</string>
-    <string name="views_description">Views</string>
-    <string name="video_description">Video</string>
+    <!-- Accessibility (описания для программ чтения с экрана) -->
+    <string name="avatar">Аватар пользователя</string>
+    <string name="avatar_description">Аватар пользователя</string>
+    <string name="menu">Меню</string>
+    <string name="menu_description">Меню действий</string>
+    <string name="like">Лайк</string>
+    <string name="like_description">Лайкнуть пост</string>
+    <string name="share">Поделиться</string>
+    <string name="share_description">Поделиться постом</string>
+    <string name="views">Просмотры</string>
+    <string name="views_description">Количество просмотров</string>
+    <string name="video_thumbnail">Превью видео</string>
+    <string name="video_thumbnail_description">Превью видео</string>
+    <string name="play_video">Воспроизвести видео</string>
+    <string name="play_video_description">Воспроизвести видео</string>
+    <string name="remove">Удалить</string>
+    <string name="remove_description">Удалить пост</string>
+    <string name="edit">Редактировать</string>
+    <string name="edit_description">Редактировать пост</string>
+    <string name="post_menu">Меню поста</string>
+    <string name="post_menu_description">Меню действий с постом</string>
+    <string name="close">Закрыть</string>
+    <string name="back">Назад</string>
+    <string name="add_post">Добавить пост</string>
+    <string name="add_post_description">Создать новый пост</string>
 
-    <!-- Menu actions -->
-    <string name="remove">Remove</string>
-    <string name="edit">Edit</string>
+    <!-- Посты -->
+    <string name="post_author">Автор</string>
+    <string name="post_date">Дата</string>
+    <string name="post_content">Содержимое</string>
+    <string name="post_content_description">Содержимое поста</string>
+    <string name="post_content_hint">Введите текст поста</string>
+    <string name="new_post">Новый пост</string>
+    <string name="edit_post">Редактирование</string>
+    <string name="post_link">Ссылка</string>
+    <string name="author_name">Имя автора</string>
+    <string name="published_date">Дата публикации</string>
 
-    <!-- Post actions -->
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="post_content_hint">Post text</string>
-    <string name="empty_posts">No posts</string>
+    <!-- Firebase -->
+    <string name="notification_channel_name">Новые посты</string>
+    <string name="notification_channel_description">Уведомления о новых постах</string>
+    <string name="fcm_token">FCM Токен</string>
+    <string name="token_loading">Загрузка токена…</string>
+    <string name="token_error">Ошибка получения токена</string>
+    <string name="refresh_token">Обновить токен</string>
 
-    <!-- Titles -->
-    <string name="new_post">New post</string>
-    <string name="edit_post">Edit post</string>
-    <string name="post_details">Post details</string>
+    <!-- Сообщения -->
+    <string name="empty_posts">Нет постов</string>
+    <string name="error_loading">Ошибка загрузки</string>
+    <string name="retry">Повторить</string>
+    <string name="empty_content">Содержимое не может быть пустым</string>
+    <string name="post_saved">Пост сохранён</string>
+    <string name="post_deleted">Пост удалён</string>
+    <string name="notifications_enabled">Уведомления разрешены</string>
+    <string name="notifications_disabled">Уведомления отклонены</string>
+    <string name="allow_notifications">Разрешите уведомления</string>
+
+    <!-- Действия -->
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="delete">Удалить</string>
+    <string name="ok">OK</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <!-- Диалоги -->
+    <string name="confirm_delete">Удалить пост?</string>
+    <string name="confirm_discard">Отменить изменения?</string>
+
+    <!-- Форматирование чисел -->
+    <string name="count_format">%s</string>
+    <string name="likes_count">%d</string>
+    <string name="shares_count">%d</string>
+    <string name="views_count">%d</string>
+
+    <!-- Иконки -->
+    <string name="ic_launcher_background_description">Фон иконки</string>
+    <string name="ic_notification_description">Иконка уведомления</string>
 </resources>

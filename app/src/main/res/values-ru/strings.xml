@@ -1,26 +1,36 @@
 <resources>
-    <string name="app_name">Посты Нетологии</string>
+    <string name="app_name">Нетология</string>
 
-    <!-- Accessibility descriptions -->
-    <string name="avatar_description">Аватар автора</string>
-    <string name="menu_description">Меню действий</string>
-    <string name="like_description">Лайк</string>
-    <string name="share_description">Поделиться</string>
-    <string name="views_description">Просмотры</string>
-    <string name="video_description">Видео</string>
-
-    <!-- Menu actions -->
-    <string name="remove">Удалить</string>
-    <string name="edit">Редактировать</string>
-
-    <!-- Post actions -->
-    <string name="save">Сохранить</string>
-    <string name="cancel">Отмена</string>
-    <string name="post_content_hint">Текст поста</string>
-    <string name="empty_posts">Нет постов</string>
-
-    <!-- Titles -->
+    <!-- Navigation -->
+    <string name="feed">Лента</string>
     <string name="new_post">Новый пост</string>
     <string name="edit_post">Редактировать пост</string>
+
+    <!-- Post -->
+    <string name="post_text">Текст поста</string>
+    <string name="post_content_hint">Введите текст поста…</string>
+    <string name="add_post">Добавить пост</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="like">Нравится</string>
+    <string name="share">Поделиться</string>
+    <string name="views">Просмотры</string>
+    <string name="remove">Удалить</string>
+    <string name="edit">Редактировать</string>
+    <string name="menu">Меню</string>
+    <string name="avatar">Аватар</string>
     <string name="post_details">Детали поста</string>
+    <string name="empty_posts">Нет постов</string>
+
+    <!-- Descriptions -->
+    <string name="avatar_description">Аватар пользователя</string>
+    <string name="menu_description">Меню опций</string>
+    <string name="like_description">Поставить лайк</string>
+    <string name="share_description">Поделиться постом</string>
+    <string name="views_description">Количество просмотров</string>
+    <string name="video_description">Видео</string>
+
+    <!-- Draft -->
+    <string name="draft_saved">Черновик сохранён</string>
+    <string name="draft_restored">Черновик восстановлен</string>
 </resources>
