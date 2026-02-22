@@ -1,57 +1,19 @@
 name: Android CI
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup JDK
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           java-version: 17
           distribution: temurin
-          cache: gradle
-
-      - name: Setup google-services
-        run: |
+      - run: |
           cat > app/google-services.json << 'EOF'
-          {
-            "project_info": {
-              "project_number": "123456789012",
-              "project_id": "nmedia-ci",
-              "storage_bucket": "nmedia-ci.appspot.com"
-            },
-            "client": [{
-              "client_info": {
-                "mobilesdk_app_id": "1:123456789012:android:abc",
-                "android_client_info": {
-                  "package_name": "ru.netology.nmedia"
-                }
-              },
-              "api_key": [{
-                "current_key": "AIzaSyDummyKey"
-              }],
-              "services": {
-                "appinvite_service": {}
-              }
-            }],
-            "configuration_version": "1"
-          }
+          {"project_info":{"project_number":"123456789012","project_id":"nmedia-ci","storage_bucket":"nmedia-ci.appspot.com"},"client":[{"client_info":{"mobilesdk_app_id":"1:123456789012:android:abc","android_client_info":{"package_name":"ru.netology.nmedia"}},"api_key":[{"current_key":"AIzaSyDummyKey"}],"services":{"appinvite_service":{}}}],"configuration_version":"1"}
           EOF
-          ls -la app/google-services.json
-
-      - name: Build
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app
-          path: app/build/outputs/apk/debug/app-debug.apk
+      - run: chmod +x gradlew
+      - run: ./gradlew assembleDebug --no-daemon
